@@ -14,7 +14,7 @@ class CardPageState extends State<CardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomWidget.BuildAppBar("出货车", context),
+      appBar: CustomWidget.buildAppBar("出货车", context),
       body: Text("出货车"),
     );
   }

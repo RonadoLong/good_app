@@ -14,7 +14,7 @@ class OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomWidget.BuildAppBar("订单", context),
+      appBar: CustomWidget.buildAppBar("订单", context),
       body: Text("订单"),
     );
   }

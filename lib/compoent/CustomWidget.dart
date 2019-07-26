@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomWidget {
   // BuildAppBar 构建导航栏
-  static AppBar BuildAppBar(String title, BuildContext context) {
+  static AppBar buildAppBar(String title, BuildContext context) {
     return new AppBar(
       title: new Text(title, style: new TextStyle(color: Colors.white)),
       centerTitle: true,
@@ -44,7 +44,7 @@ class CustomWidget {
   }
 
   ///上拉加载更多
-  static Widget BuildLoadMoreView() {
+  static Widget buildLoadMoreView() {
     Widget bottomWidget =
         new Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       new SpinKitThreeBounce(color: Color(0xFF24292E)),
@@ -60,7 +60,7 @@ class CustomWidget {
     );
   }
 
-  static Container BuildLogImage(String url) {
+  static Container buildLogImage(String url) {
     var avatar = url == null
         ? "http://gp.axinmama.com/public/static/home/img/moblie/default-user-img5.png"
         : url;
@@ -80,18 +80,36 @@ class CustomWidget {
     );
   }
 
-  static Widget BuildLineView(double height) { 
+  // 构建横线的试图
+  static Widget buildLineView(double height) { 
     return Container(
       height: height >= 0 ? 2 : height,
       color: Color.fromARGB(50, 183, 187, 197),
     );
   }
 
-  static Widget BuildLoadingView() {
+  // 构建加载试图
+  static Widget buildLoadingView() {
    return new Center(
         child: CircularProgressIndicator(
           backgroundColor: UIData.refresh_color,
         ),
       );
+  }
+
+  // 构建图片在上文字在下的控件
+  static Widget buildImageTextBtn(Widget image, String title,Function onTap) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          image,
+          Padding(padding: EdgeInsets.only(top: 6),),
+          Text(title,style: TextStyle(color: UIData.normal_font_color, fontSize: 16),)
+        ],
+      ),
+    );
   }
 }

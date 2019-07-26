@@ -62,7 +62,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   Widget _createBody(BuildContext context) {
     if (contents == null) {
-      return CustomWidget.BuildLoadingView();
+      return CustomWidget.buildLoadingView();
     }
     if (contents.length == 0 || contents.isEmpty) {
       return new Center(
@@ -87,10 +87,10 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                 onTap: () {
                   print(consumer.id);
                 },
-                child: CreateCell(consumer),
+                child: createCell(consumer),
               );
             } else {
-              return CustomWidget.BuildLoadMoreView(); //展示加载loading框
+              return CustomWidget.buildLoadMoreView(); //展示加载loading框
             }
           },
           physics: const AlwaysScrollableScrollPhysics(),

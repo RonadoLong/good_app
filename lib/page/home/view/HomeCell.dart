@@ -3,7 +3,7 @@ import 'package:good_app/page/home/model/Consumer.dart';
 import 'package:good_app/utils/UIData.dart';
 
 // CreateCell 构建cell
-Container CreateCell(Consumer consumer) {
+Container createCell(Consumer consumer) {
   return Container(
     padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
     child: Row(
