@@ -86,4 +86,12 @@ class CustomWidget {
       color: Color.fromARGB(50, 183, 187, 197),
     );
   }
+
+  static Widget BuildLoadingView() {
+   return new Center(
+        child: CircularProgressIndicator(
+          backgroundColor: UIData.refresh_color,
+        ),
+      );
+  }
 }

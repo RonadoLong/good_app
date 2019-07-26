@@ -62,47 +62,46 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   Widget _createBody(BuildContext context) {
     if (contents == null) {
-      return new Center(
-        child: CircularProgressIndicator(
-          backgroundColor: UIData.refresh_color,
-        ),
-      );
+      return CustomWidget.BuildLoadingView();
     }
-
     if (contents.length == 0 || contents.isEmpty) {
       return new Center(
         child: CustomWidget.buildEmptyView(),
       );
-    } else {
-      return new RefreshIndicator(
-          onRefresh: (() => _handleRefresh()),
-          color: UIData.refresh_color, //刷新控件的颜色
-          child: ListView.separated(
-            itemCount: contents.length >= 10 ? contents.length + 1 : contents.length,
-            controller: _scrollController, //用于监听是否滑到最底部
-            itemBuilder: (context, index) {
-              if (index < contents.length) {
-                Consumer consumer = contents[index];
-                return GestureDetector(
-                  onTap: () {
-                    print(consumer.id);
-                  },
-                  child: CreateCell(consumer),
-                );
-              } else {
-                return CustomWidget.BuildLoadMoreView(); //展示加载loading框
-              }
-            },
-            physics: const AlwaysScrollableScrollPhysics(),
-            separatorBuilder: (context, idx) {
-              return Container(
-                height: 2,
-                color: Color.fromARGB(50, 183, 187, 197),
-              );
-            },
-          )
-        );
     }
+    return _buildContent();
+  }
+
+  Widget _buildContent() {
+    return new RefreshIndicator(
+        onRefresh: (() => _handleRefresh()),
+        color: UIData.refresh_color, //刷新控件的颜色
+        child: ListView.separated(
+          itemCount:
+              contents.length >= 10 ? contents.length + 1 : contents.length,
+          controller: _scrollController, //用于监听是否滑到最底部
+          itemBuilder: (context, index) {
+            if (index < contents.length) {
+              Consumer consumer = contents[index];
+              return GestureDetector(
+                onTap: () {
+                  print(consumer.id);
+                },
+                child: CreateCell(consumer),
+              );
+            } else {
+              return CustomWidget.BuildLoadMoreView(); //展示加载loading框
+            }
+          },
+          physics: const AlwaysScrollableScrollPhysics(),
+          separatorBuilder: (context, idx) {
+            return Container(
+              height: 2,
+              color: Color.fromARGB(50, 183, 187, 197),
+            );
+          },
+        )
+    );
   }
 
   Future<void> _handleRefresh() {
