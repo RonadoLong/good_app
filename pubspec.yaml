@@ -28,7 +28,16 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flustars: ^0.2.5
-
+  date_format: ^1.0.5
+  crypto: ^2.0.6
+  fluttertoast: any
+  flutter_refresh: any
+  gbk2utf8: ^0.0.1
+  cached_network_image: ^1.0.0
+  json_serializable: ^1.5.1
+  flutter_spinkit: ^3.1.0
+  flutter_screenutil: ^0.5.2
+  dio: any  #latest version
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

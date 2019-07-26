@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   final materialApp = MaterialApp(
       title: UIData.appName,
-      // theme: new ThemeData(
-      //   primaryColor: UIData.primary_color,
-      // ),
+      theme: new ThemeData(
+        primaryColor: UIData.primary_color,
+      ),
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
       home: MainPage(),);
