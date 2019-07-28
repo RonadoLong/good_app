@@ -24,9 +24,8 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   void initState() {
     _loadData();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        print("load more");
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+          _loadMoreData();
       }
     });
     super.initState();
@@ -34,7 +33,13 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   void _loadData() {
     setState(() {
-      contents = MockContents();
+      contents = mockContents();
+    });
+  }
+
+  void _loadMoreData() {
+    setState(() {
+      contents.addAll(mockContents());
     });
   }
 
@@ -97,7 +102,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
           separatorBuilder: (context, idx) {
             return Container(
               height: 2,
-              color: Color.fromARGB(50, 183, 187, 197),
+              // color: Color.fromARGB(50, 183, 187, 197),
             );
           },
         )
@@ -111,6 +116,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
     });
     return completer.future.then<void>((_) {
       print("REFRESH_REQIEST");
+      _loadData();
     });
   }
 

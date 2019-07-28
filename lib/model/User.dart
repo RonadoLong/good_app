@@ -1,0 +1,5 @@
+
+class User {
+
+}
+// {"code":0,"msg":"success","data":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJUWVBFIjozLCJMT0dJQ19JRCI6NzE1NjQyMzg2MDcyNjczMjUwLCJBQ0NPVU5UX0lEIjo3MTU2NDIzODYwNzI0MjU5MjYsIlBPUlRfSUQiOjcxNTY0MjM4NjA3MjY3NjUxMCwiZXhwIjoxNTY0MjQ1ODA3LCJuYmYiOjE1NjQyMzg2MDd9.3UxurLabDODPy_5WFaqW7Ebn-mnz3vfsOgmiXjXgjOc","corpId":715642386072676510,"staffId":715642386072673250,"accountId":715642386072425926},"requestId":null}

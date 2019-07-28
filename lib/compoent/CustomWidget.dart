@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:good_app/utils/UIData.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flustars/flustars.dart';
 
 class CustomWidget {
   // BuildAppBar 构建导航栏
@@ -47,10 +48,13 @@ class CustomWidget {
   static Widget buildLoadMoreView() {
     Widget bottomWidget =
         new Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      new SpinKitThreeBounce(color: Color(0xFF24292E)),
-      new Container(
-        width: 5.0,
+      new SpinKitThreeBounce(
+        color: UIData.refresh_color,
+        size: 20,
       ),
+      // new Container(
+      //   width: 5.0,
+      // ),
     ]);
     return new Padding(
       padding: const EdgeInsets.all(5.0),
@@ -62,18 +66,18 @@ class CustomWidget {
 
   static Container buildLogImage(String url) {
     var avatar = url == null
-        ? "http://gp.axinmama.com/public/static/home/img/moblie/default-user-img5.png"
+        ? "https://appicon.pgyer.com/image/view/app_icons/2b2c39138d11d60dc24374e77043ac59/120"
         : url;
     return Container(
       width: 80.0,
       height: 80.0,
       decoration: new BoxDecoration(
         shape: BoxShape.circle,
-        color: UIData.primary_color,
+        color: Colors.white,
         image: new DecorationImage(
             image: new NetworkImage(avatar), fit: BoxFit.cover),
         border: new Border.all(
-          color: UIData.primary_color,
+          color: Colors.white,
           width: 2.0,
         ),
       ),
@@ -81,35 +85,47 @@ class CustomWidget {
   }
 
   // 构建横线的试图
-  static Widget buildLineView(double height) { 
+  static Widget buildLineView(double height) {
     return Container(
-      height: height >= 0 ? 2 : height,
-      color: Color.fromARGB(50, 183, 187, 197),
+      height: height > 0 ? height : 2,
+      color: UIData.normal_line_color,
     );
   }
 
   // 构建加载试图
   static Widget buildLoadingView() {
-   return new Center(
-        child: CircularProgressIndicator(
-          backgroundColor: UIData.refresh_color,
-        ),
-      );
+    return new Center(
+      child: CircularProgressIndicator(
+        backgroundColor: UIData.refresh_color,
+      ),
+    );
   }
 
   // 构建图片在上文字在下的控件
-  static Widget buildImageTextBtn(Widget image, String title,Function onTap) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          image,
-          Padding(padding: EdgeInsets.only(top: 6),),
-          Text(title,style: TextStyle(color: UIData.normal_font_color, fontSize: 16),)
-        ],
+  static Widget buildImageTextBtn(Widget image, String title, Function onTap) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            image,
+            Padding(
+              padding: EdgeInsets.only(top: 6),
+            ),
+            Text(
+              title,
+              style: TextStyle(color: UIData.normal_font_color, fontSize: 16),
+            )
+          ],
+        ),
       ),
     );
   }
 }
+
+ 

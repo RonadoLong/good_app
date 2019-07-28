@@ -30,7 +30,7 @@ dev_dependencies:
   flustars: ^0.2.5
   date_format: ^1.0.5
   crypto: ^2.0.6
-  fluttertoast: any
+  fluttertoast: ^3.0.4
   flutter_refresh: any
   gbk2utf8: ^0.0.1
   cached_network_image: ^1.0.0
@@ -38,7 +38,8 @@ dev_dependencies:
   flutter_spinkit: ^3.1.0
   flutter_screenutil: ^0.5.2
   dio: any  #latest version
-
+  flutter_candlesticks: ^0.1.4
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

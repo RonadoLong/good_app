@@ -64,11 +64,12 @@ class UIData {
   static const String something_went_wrong = "Something went wrong";
   static const String coming_soon = "Coming Soon";
 
+  static const Color normal_image_color = Color(0xFF888888);
   static const Color normal_font_color = Color(0xFF24292E);
-  static const Color normal_line_color = Colors.grey;
+  static const Color normal_line_color = Color(0xFFF5F5F5);
   // static const Color primary_color = Color.fromARGB(255, 255, 127, 80);
-    static const Color primary_color = Colors.blue;
-
+  static const Color primary_color = Colors.blue;
+  static const Color black_color = Color(0xFF24292E);
   static const Color grey_color = Color(0xFF24292E);
   static const Color refresh_color = Colors.cyan;
 

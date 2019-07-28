@@ -32,9 +32,9 @@ class MinePageState extends State<MinePage> {
   Widget build(BuildContext context) {
     List<Widget> rows = [
       _createHeader(),
-      CustomWidget.buildLineView(20),
+      CustomWidget.buildLineView(2),
       buildContent(),
-      CustomWidget.buildLineView(20),
+      CustomWidget.buildLineView(2),
       buildGrid(),
     ];
     var listView = RefreshIndicator(
@@ -43,7 +43,7 @@ class MinePageState extends State<MinePage> {
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
         separatorBuilder: (context, idx) {
-          return CustomWidget.buildLineView(8);
+          return CustomWidget.buildLineView(4);
         },
         itemCount: 5,
         itemBuilder: (context, i) => rows[i],
@@ -110,6 +110,7 @@ class MinePageState extends State<MinePage> {
   // 统计分析
   Widget buildContent() {
     return Container(
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -119,15 +120,16 @@ class MinePageState extends State<MinePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.trending_up, 28), "营业概况",
-                  () {
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.trending_up, 28), "营业概况", () {
                 print("1");
               }),
-              CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.settings, 28), "系统设置",
-                  () {
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.settings, 28), "系统设置", () {
                 print("2");
               }),
-              CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.supervisor_account, 28), "员工管理",
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.supervisor_account, 28), "员工管理",
                   () {
                 print("3");
               }),
@@ -140,56 +142,65 @@ class MinePageState extends State<MinePage> {
 
   // 九宫格
   Widget buildGrid() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        buildHeaderTitleView("货品管理"),
-        CustomWidget.buildLineView(2),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.list, 28), "列表", () {
-              print("1");
-            }),
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.add_alarm, 28), "添加", () {
-              print("2");
-            }),
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.category, 28), "分类", () {
-              print("3");
-            }),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.format_color_fill, 28), "规格", () {
-              print("4");
-            }),
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.vibration, 28), "属性", () {
-              print("5");
-            }),
-            CustomWidget.buildImageTextBtn(buildIconFromIconData(Icons.attach_money, 28), "价格", () {
-              print("6");
-            }),
-          ],
-        )
-      ],
+    return Container(
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          buildHeaderTitleView("货品管理"),
+          CustomWidget.buildLineView(2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.list, 28), "列表", () {
+                print("1");
+              }),
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.add_alarm, 28), "添加", () {
+                print("2");
+              }),
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.category, 28), "分类", () {
+                print("3");
+              }),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.format_color_fill, 28), "规格", () {
+                print("4");
+              }),
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.vibration, 28), "属性", () {
+                print("5");
+              }),
+              CustomWidget.buildImageTextBtn(
+                  buildIconFromIconData(Icons.attach_money, 28), "价格", () {
+                print("6");
+              }),
+            ],
+          )
+        ],
+      ),
     );
   }
 
   Widget buildHeaderTitleView(String text) {
     return Container(
-      padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
-      child: Text(
-        text,
-        style: TextStyle(color: UIData.normal_font_color, fontSize: 16),
-      ),
-    );
+        color: Colors.white,
+        padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
+        child: Text(
+          text,
+          style: TextStyle(color: UIData.normal_font_color, fontSize: 16),
+        ));
   }
 
   Widget buildIconFromIconData(IconData iconData, double size) {
-    return Icon(iconData, color: UIData.normal_line_color, size: size);
+    return Icon(iconData, color: UIData.normal_image_color,size: size);
   }
 }

@@ -1,16 +1,19 @@
+
 import 'package:flutter/material.dart';
 import 'package:good_app/page/card/CardPage.dart';
+import 'package:good_app/page/login/LoginPage.dart';
 import 'package:good_app/utils/EventBus.dart';
 import 'package:good_app/page/home/HomePage.dart';
 import 'package:good_app/page/mine/MinePage.dart';
 import 'package:good_app/page/order/OrderPage.dart';
 import 'package:good_app/utils/UIData.dart';
 import 'package:flustars/flustars.dart';
+import 'dart:async' as async;
 
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+       return new MaterialApp(
         debugShowCheckedModeBanner: false, home: new MainPageWidget());
   }
 }
@@ -27,6 +30,7 @@ class MainPageState extends State<MainPageWidget> {
   var tabImages;
   var appBarTitles = ['客户', '出货车', '订单', '我的'];
   var bus = new EventBus();
+  var isLogin;
 
   var _pageList;
   final blueCode = Color(0xff1296db);
@@ -62,64 +66,13 @@ class MainPageState extends State<MainPageWidget> {
     return new Image.asset(path, width: 24.0, height: 24.0);
   }
 
-  void load() async {
-    // await SpUtil.getInstance();
-  }
-
   void initData() {
-    load();
-
-    /*
-     * 初始化选中和未选中的icon
-     */
     tabImages = [
       [Icon(Icons.home), Icon(Icons.home, color: UIData.primary_color)],
-      [
-        Icon(Icons.shopping_cart),
-        Icon(Icons.shopping_cart, color: UIData.primary_color)
-      ],
+      [Icon(Icons.shopping_cart),Icon(Icons.shopping_cart, color: UIData.primary_color)],
       [Icon(Icons.message), Icon(Icons.message, color: UIData.primary_color)],
-      [
-        Icon(Icons.person_pin),
-        Icon(Icons.person_pin, color: UIData.primary_color)
-      ],
+      [Icon(Icons.person_pin),Icon(Icons.person_pin, color: UIData.primary_color)],
     ];
-
-    var titleList = ['广场', '股讯'];
-    Widget home = new DefaultTabController(
-      length: titleList.length,
-      child: new Scaffold(
-        appBar: new AppBar(
-          elevation: 0.0, //导航栏下面那根线
-          backgroundColor: UIData.primary_color,
-          title: new TabBar(
-            isScrollable: false,
-            //是否可滑动
-            unselectedLabelColor: Colors.black38,
-            //未选中按钮颜色
-            labelColor: Colors.white,
-            //选中按钮颜色
-            labelStyle: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
-            //文字样式
-            indicatorSize: TabBarIndicatorSize.label,
-            //滑动的宽度是根据内容来适应,还是与整块那么大(label表示根据内容来适应)
-            indicatorWeight: 3.0,
-            //滑块高度
-            indicatorColor: Colors.white,
-            //滑动颜色
-            indicatorPadding: EdgeInsets.only(bottom: 1.0),
-            //与底部距离为1
-            tabs: titleList.map((String text) {
-              //tabs表示具体的内容,是一个数组
-              return new Tab(
-                text: text,
-              );
-            }).toList(),
-          ),
-        ),
-        body: TabBarView(children: [HomePage(), HomePage()]),
-      ),
-    );
 
     _pageList = [
       HomePage(),
@@ -136,38 +89,66 @@ class MainPageState extends State<MainPageWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    //初始化数据
+  void initState() {
+    super.initState();
     initData();
-
-    return Scaffold(
-        body: IndexedStack(
-          index: _tabIndex,
-          children: _pageList,
-        ),
-        bottomNavigationBar: new BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            new BottomNavigationBarItem(
-                icon: getTabIcon(0), title: getTabTitle(0)),
-            new BottomNavigationBarItem(
-                icon: getTabIcon(1), title: getTabTitle(1)),
-            new BottomNavigationBarItem(
-                icon: getTabIcon(2), title: getTabTitle(2)),
-            new BottomNavigationBarItem(
-                icon: getTabIcon(3), title: getTabTitle(3)),
-          ],
-          type: BottomNavigationBarType.fixed,
-          //默认选中首页
-          currentIndex: _tabIndex,
-          iconSize: 24.0,
-          //点击事件
-          onTap: (index) {
-            var idx = index == 2 ? true : false;
-            bus.emit("changeTimeLineStatus", idx);
-            setState(() {
-              _tabIndex = index;
-            });
-          },
-        ));
+    _initAsync();
+    bus.on("login-success", (ret){
+        setState(() {
+          isLogin = true;
+        });
+    });
   }
+
+ void _initAsync() async {
+    await SpUtil.getInstance();
+    delayedfresh((){
+      setState(() {
+        isLogin = SpUtil.haveKey("userInfo");
+      });
+    });
+  }
+
+Future<void> delayedfresh(Function todo) {
+  final async.Completer<void> completer = async.Completer<void>();
+    Future.delayed(Duration(seconds: 1), () {
+      completer.complete();
+    });
+    return completer.future.then<void>((_) {
+      todo();
+    });
+  }
+  
+    @override
+    Widget build(BuildContext context) {
+      return isLogin == null ? Container() : Scaffold(
+          body: isLogin == false ? LoginPage(): IndexedStack(
+            index: _tabIndex,
+            children: _pageList,
+          ),
+          bottomNavigationBar: isLogin == false ? null : new BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              new BottomNavigationBarItem(
+                  icon: getTabIcon(0), title: getTabTitle(0)),
+              new BottomNavigationBarItem(
+                  icon: getTabIcon(1), title: getTabTitle(1)),
+              new BottomNavigationBarItem(
+                  icon: getTabIcon(2), title: getTabTitle(2)),
+              new BottomNavigationBarItem(
+                  icon: getTabIcon(3), title: getTabTitle(3)),
+            ],
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            currentIndex: _tabIndex,
+            iconSize: 24.0,
+            onTap: (index) {
+              var idx = index == 2 ? true : false;
+              bus.emit("changeTimeLineStatus", idx);
+              setState(() {
+                _tabIndex = index;
+              });
+            },
+          ));
+    }
+  
 }

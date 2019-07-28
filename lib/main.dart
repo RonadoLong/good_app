@@ -9,17 +9,16 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
-  final materialApp = MaterialApp(
+  @override
+  Widget build(BuildContext context) {
+    final materialApp = MaterialApp(
       title: UIData.appName,
       theme: new ThemeData(
         primaryColor: UIData.primary_color,
       ),
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
-      home: MainPage(),);
-
-  @override
-  Widget build(BuildContext context) {
+      home: MainPage() );
     return materialApp;
   }
 }
