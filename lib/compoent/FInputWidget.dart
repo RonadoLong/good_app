@@ -43,7 +43,7 @@ class _FInputWidgetState extends State<FInputWidget> {
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
       keyboardType: widget.isNumber ? TextInputType.number : TextInputType.text,
-      style: TextStyle(color: UIData.normal_line_color, fontSize: 14),
+      style: TextStyle(fontSize: 14),
       decoration: new InputDecoration(
         hintText: widget.hintText,
         icon: widget.iconData == null ? null : new Icon(widget.iconData),

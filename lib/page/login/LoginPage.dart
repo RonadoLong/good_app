@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                     isLoading = false;
                   });
                   if (res["code"] == 0) {
-                     var userInfo = res["data"].toString();
+                     var userInfo = res["data"];
                       SpUtil.putObject("userInfo", userInfo).then((val){
                           print(val);
                           if (val) {
@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                       }); 
                    
                   } else {
-                    ShowToast(res["msg"]);
+                    ShowToast("登录失败");
                   }
                 }).catchError((err) {
                   setState(() {

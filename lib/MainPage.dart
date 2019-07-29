@@ -104,10 +104,11 @@ class MainPageState extends State<MainPageWidget> {
     await SpUtil.getInstance();
     delayedfresh((){
       setState(() {
+        SpUtil.clear();
         isLogin = SpUtil.haveKey("userInfo");
       });
     });
-  }
+ }
 
 Future<void> delayedfresh(Function todo) {
   final async.Completer<void> completer = async.Completer<void>();

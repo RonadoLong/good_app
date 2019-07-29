@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:good_app/api/customer/Customer.dart';
 import 'package:good_app/compoent/CustomWidget.dart';
 import 'package:good_app/page/home/model/Consumer.dart';
 import 'package:good_app/page/home/view/HomeCell.dart';
@@ -32,6 +33,13 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   }
 
   void _loadData() {
+    var req = {
+      "pageNum": 1,
+      "pageSize": 10
+    };
+    GetCustomerList(req).then((res){
+      print(res);
+    });
     setState(() {
       contents = mockContents();
     });

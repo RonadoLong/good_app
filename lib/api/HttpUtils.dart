@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:good_app/utils/SpUtil.dart';
 const bool inProduction = const bool.fromEnvironment("dart.vm.product");
 const PROHOST = "http://www.mateforce.cn";
 const DEVHOST = "http://www.mateforce.cn";
@@ -33,18 +34,17 @@ class Http {
 
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
-      // User user = GetLocalUser();
-      // if (user != null) {
-      //   options.headers["Authorization"] = user.access_token;
-      // }
+      var user = SpUtil.getObject("userInfo");
+      print(user);
+      if (user != null) {
+        options.headers["kp-token"] = user["token"];
+      }
       return options;
     }, onResponse: (Response response) {
       // 在返回响应数据之前做一些预处理
-  
       // print("InterceptorsWrapper ===== $response.data ");
       return response; // continue
     }, onError: (DioError e) {
-      // ShowToast("请求失败，请重试");
       print("InterceptorsWrapper ====== err $e");
       return e;
     }));
